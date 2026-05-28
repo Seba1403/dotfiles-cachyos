@@ -10,7 +10,9 @@ local qsIpcCall = "qs -c $qsConfig ipc call"
 local qsIsAlive = qsIpcCall .. " TEST_ALIVE"
 
 
-hl.bind("SUPER + space", hl.dsp.exec_cmd("pkill fuzzel || fuzzel"), { description = "App: Launcher (Fuzzel)" })
+hl.bind("SUPER + space", hl.dsp.exec_cmd("~/.config/hypr/launcher.sh"), { description = "Launcher" })
+
+
 hl.bind("SUPER + J", hl.dsp.layout("togglesplit"), { description = "Window: Toggle split orientation" })
 
 hl.bind("SUPER + Tab", hl.dsp.global("quickshell:overviewWorkspacesToggle"), { description = "Shell: Toggle overview" })
@@ -171,24 +173,24 @@ hl.bind("SUPER + ALT + F", hl.dsp.window.fullscreen_state({ internal = 0, client
 hl.bind("SUPER + P", hl.dsp.window.pin(), { description = "Window: Pin" })
 
 --#/# bind = SUPER+ALT, Hash,, -- Send to workspace -- (1, 2, 3,...)
---# Send ONLY the active window to workspace silently (1, 2, 3,...)
+
+
+-- Mover ventana a otro escritorio con SHIFT + ALT + [0-9]
 for i = 1, 10 do
-    local ws = i % 10
-    hl.bind("SUPER + ALT + " .. ws, hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent " .. i), 
-        { description = "Window: Send to workspace " .. i })
+    hl.bind("SUPER + SHIFT + " .. (i % 10), function()
+        hl.dispatch(hl.dsp.window.move({ workspace = tostring(i), follow = false }))
+    end, { description = "Window: Send to workspace " .. i })
 end
 
---# Raw keycodes fix (para layouts que cambian el comportamiento del número)
-for i = 1, 10 do
-    local numberkey = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 }
-    hl.bind("SUPER + ALT + code:" .. numberkey[i], hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent " .. i))
-end
-
---# Keypad numbers fix (para el teclado numérico)
+-- Fix para los números del teclado numérico (Numpad)
 for i = 1, 10 do
     local numpadkey = { 87, 88, 89, 83, 84, 85, 79, 80, 81, 90 }
-    hl.bind("SUPER + ALT + code:" .. numpadkey[i], hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent " .. i))
+    hl.bind("SUPER + SHIFT + code:" .. numpadkey[i], function()
+        hl.dispatch(hl.dsp.window.move({ workspace = tostring(i), follow = false }))
+    end)
 end
+
+
 --# #/# bind = SUPER+SHIFT, Scroll ↑/↓,, -- Send to workspace left/right
 for i = 1, 4 do
     local key = { "SUPER + SHIFT + mouse_", "SUPER + ALT + mouse_" }
