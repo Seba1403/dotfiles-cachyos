@@ -1,9 +1,14 @@
 -- MONITOR CONFIG
 hl.monitor({
-    output = "",
-    mode = "highres",
+    output = "DP-2",
+    mode = "2560x1440@144",
     position = "auto",
-    scale = 1,
+    scale = 1.25,
+})
+
+hl.monitor({
+    output = "HDMI-A-1",
+    disabled = true,
 })
 
 hl.gesture({
@@ -254,16 +259,18 @@ hl.animation({
 
 hl.config({
     input = {
+        --force_no_accel = true,
+        accel_profile = "flat",
         kb_layout = "us(intl)",
         numlock_by_default = true,
         repeat_delay = 250,
         repeat_rate = 35,
+        sensitivity = -0.3,  
 
         follow_mouse = 1,
         off_window_axis_events = 2,
 
-		sensitivity = 0,    
-		force_no_accel = true,
+		  
 
 
         touchpad = {
@@ -275,6 +282,7 @@ hl.config({
     },
 
     misc = {
+  
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
         vrr = 1,

@@ -14,12 +14,15 @@ hl.bind("SUPER + space", hl.dsp.exec_cmd("~/.config/hypr/launcher.sh"), { descri
 
 
 hl.bind("SUPER + J", hl.dsp.layout("togglesplit"), { description = "Window: Toggle split orientation" })
+hl.bind("SUPER + A", hl.dsp.exec_cmd("brave --app=https://gemini.google.com"), { description = "App: Gemini PWA" })
+hl.bind("SUPER + SHIFT+ W", hl.dsp.exec_cmd("brave --app=https://web.whatsapp.com"), { description = "App: Whatsapp PWA" })
+hl.bind("SUPER + N", hl.dsp.exec_cmd("brave --app=https://app.notion.com"), { description = "App: Gemini PWA" })
+
 
 hl.bind("SUPER + Tab", hl.dsp.global("quickshell:overviewWorkspacesToggle"), { description = "Shell: Toggle overview" })
 hl.bind("SUPER + V", hl.dsp.global("quickshell:overviewClipboardToggle"))
 hl.bind("SUPER + Period", hl.dsp.global("quickshell:overviewEmojiToggle"))
 hl.bind("SUPER + Slash", hl.dsp.global("quickshell:cheatsheetToggle"), { description = "Shell: Toggle cheatsheet" })
-hl.bind("SUPER + K", hl.dsp.global("quickshell:oskToggle"), { description = "Shell: Toggle on-screen keyboard" })
 hl.bind("SUPER + M", hl.dsp.global("quickshell:mediaControlsToggle"), { description = "Shell: Toggle media controls" })
 hl.bind("SUPER + G", hl.dsp.global("quickshell:overlayToggle"), { description = "Shell: Toggle widget overlay" })
 hl.bind("CTRL + ALT + Delete", hl.dsp.global("quickshell:sessionToggle"), { description = "Shell: Toggle session menu" })
@@ -80,10 +83,9 @@ hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.
     { locked = true, description = "Utilities: Record screen (with sound)" })
 --# Fullscreen screenshot
 local grimhyprctl = "grim -o \"$(hyprctl activeworkspace -j | jq -r '.monitor')\""
-hl.bind("Print", hl.dsp.exec_cmd(grimhyprctl .. " - | wl-copy"),
-    { locked = true, description = "Utilities: Screenshot >> clipboard" })
-hl.bind("CTRL + Print", hl.dsp.exec_cmd(
-    "mkdir -p $(xdg-user-dir PICTURES)/Screenshots && " ..
+
+hl.bind("Print", hl.dsp.exec_cmd(
+    "mkdir -p $(xdg-user-dir PICTURES)/Captura  && " ..
     grimhyprctl .. " $(xdg-user-dir PICTURES)/Screenshots/Screenshot_\"$(date '+%Y-%m-%d_%H.%M.%S')\".png"
 ), { locked = true, non_consuming = true, description = "Utilities: Screenshot >> clipboard & file" })
 hl.bind("CTRL + Print", hl.dsp.exec_cmd(grimhyprctl .. " - | wl-copy"), { locked = true, non_consuming = true })
@@ -127,7 +129,7 @@ hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SOURCE@ tog
 --##! Window
 --# Focusing
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Window: Move" })
-hl.bind("SUPER + mouse:274", hl.dsp.window.drag(), { mouse = true })
+--hl.bind("SUPER + mouse:274", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Window: Resize" })
 --#/# bind = SUPER + ←/↑/→/↓,, -- Focus in direction
 for i = 1, 4 do
@@ -328,6 +330,9 @@ hl.bind("SUPER + X", hl.dsp.exec_cmd(textEditor), { description = "App: Text edi
 hl.bind("CTRL + SUPER + V", hl.dsp.exec_cmd(volumeMixer), { description = "App: Volume mixer" })
 hl.bind("SUPER + I", hl.dsp.exec_cmd(settingsApp), { description = "App: Settings app" })
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(taskManager), { description = "App: Task manager" })
+hl.bind("XF86Calculator", hl.dsp.exec_cmd("kcalc"), { description = "App: Calculator" })
+
+
 
 --# Cursed stuff
 --## Make window not amogus large

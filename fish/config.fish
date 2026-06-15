@@ -7,8 +7,13 @@ if status is-interactive
     alias celar clear
     alias claer clear
 
-    # Goku en azul y textos de specs en rosado
-    /usr/bin/fastfetch --logo /home/seba/.config/ascii-terminal --logo-type file --logo-width 42 --color-keys "blue" --color-title "blue" --logo-color-1 "blue" --logo-color-2 "blue"
+    # ASCII
+# ASCII
+    /usr/bin/fastfetch --logo /home/seba/.config/ascii-terminal --logo-type file --logo-padding-right 4 --color-keys "blue" --color-title "blue" --logo-color-1 "blue" --logo-color-2 "blue"
 
     set -e LS_COLORS
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/seba/.local/bin" $PATH
